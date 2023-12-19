@@ -4,8 +4,9 @@ checkUser();
 include('user_header.php');
 
 if (isset($_GET['type']) && $_GET['type'] == 'delete' && isset($_GET['category_id']) && $_GET['category_id'] > 0) {
-    echo $id = get_safe_value($_GET['category_id']);
-
+    $id = get_safe_value($_GET['category_id']);
+    mysqli_query($conn, "DELETE FROM category WHERE category_id='$id'");
+    echo "<br/>Category deleted";
 }
 
 $res = mysqli_query($conn, "SELECT * FROM category");
@@ -32,7 +33,7 @@ $res = mysqli_query($conn, "SELECT * FROM category");
                 </td>
                 <td>
                     <a href="">Edit</a>&nbsp;
-                    <a href="type=delete&category_id=<?php echo $row['category_id']; ?>">Delete</a>
+                    <a href="?type=delete&category_id=<?php echo $row['category_id']; ?>">Delete</a>
                 </td>
             </tr>
             <?php
