@@ -1,6 +1,7 @@
 <?php
-include ('header.php');
+include('header.php');
 checkUser();
+include('user_header.php');
 ?>
 
 <h2>Dashboard</h2>
