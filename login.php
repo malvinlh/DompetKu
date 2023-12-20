@@ -39,101 +39,160 @@ else
   <!-- Bootstrap core CSS -->
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <style>
-    .login-form {
-      width: 340px;
-      margin: 50px auto;
-      font-size: 15px;
+    *{
+        margin: 0;
+        padding: 0;
+        font-family: sans-serif;
+    }
+    section{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        width: 100%;
+        
+        background: url('uploads/login_bg.jpg')no-repeat;
+        background-position: center;
+        background-size: cover;
+    }
+    .form-box{
+        position: relative;
+        width: 400px;
+        height: 450px;
+        background: transparent;
+        border: 2px solid rgba(255,255,255,0.5);
+        border-radius: 20px;
+        backdrop-filter: blur(15px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+    }
+    h2{
+        font-size: 2em;
+        color: #fff;
+        text-align: center;
+    }
+    .inputbox{
+        position: relative;
+        margin: 30px 0;
+        width: 310px;
+        border-bottom: 2px solid #fff;
+    }
+    .inputbox label{
+        position: absolute;
+        top: 50%;
+        left: 5px;
+        transform: translateY(-50%);
+        color: #fff;
+        font-size: 1em;
+        pointer-events: none;
+        transition: .5s;
+    }
+    input:focus ~ label,
+    input:valid ~ label{
+    top: -5px;
+    }
+    .inputbox input {
+        width: 100%;
+        height: 50px;
+        background: transparent;
+        border: none;
+        outline: none;
+        font-size: 1em;
+        padding:0 35px 0 5px;
+        color: #fff;
+    }
+    .inputbox ion-icon{
+        position: absolute;
+        right: 8px;
+        color: #fff;
+        font-size: 1.2em;
+        top: 20px;
+    }
+    .forget{
+        margin: -15px 0 15px ;
+        font-size: .9em;
+        color: #fff;
+        display: flex;
+        justify-content: space-between;  
     }
 
-    .login-form form {
-      margin-bottom: 15px;
-      background: #fff;
-      box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-      padding: 30px;
-      border: 1px solid #ddd;
+    .forget label input{
+        margin-right: 3px;
+        
     }
-
-    .login-form h2 {
-      color: #636363;
-      margin: 0 0 15px;
-      position: relative;
-      text-align: center;
+    .forget label a{
+        color: #fff;
+        text-decoration: none;
     }
-
-    .login-form h2:before,
-    .login-form h2:after {
-      content: "";
-      height: 2px;
-      width: 20%;
-      background: #d4d4d4;
-      position: absolute;
-      top: 50%;
-      z-index: 2;
+    .forget label a:hover{
+        text-decoration: underline;
     }
-
-    .login-form h2:before {
-      left: 0;
+    button{
+        width: 100%;
+        height: 40px;
+        border-radius: 40px;
+        background: #fff;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        font-size: 1em;
+        font-weight: 600;
     }
-
-    .login-form h2:after {
-      right: 0;
+    .register{
+        font-size: .9em;
+        color: #fff;
+        text-align: center;
+        margin: 25px 0 10px;
     }
-
-    .login-form .hint-text {
-      color: #999;
-      margin-bottom: 30px;
-      text-align: center;
+    .register p a{
+        text-decoration: none;
+        color: #fff;
+        font-weight: 600;
     }
-
-    .login-form a:hover {
-      text-decoration: none;
+    .register p a:hover{
+        text-decoration: underline;
     }
-
-    .form-control,
-    .btn {
-      min-height: 38px;
-      border-radius: 2px;
-    }
-
-    .btn {
-      font-size: 15px;
-      font-weight: bold;
-    }
-
     .error-message {
-      color: #ff0000;
       text-align: center;
+      font-weight: bold;
       margin-bottom: 15px;
     }
   </style>
 </head>
 
 <body>
-  <div class="login-form">
-    <form action="" method="POST" autocomplete="off">
-      <h2 class="text-center">DompetKu</h2>
-      <p class="hint-text">Login Panel</p>
-      <?php
-        if (!empty($errormsg)) 
-        {
-          echo '<div class="error-message">' . $errormsg . '</div>';
-        }
-      ?>
-      <div class="form-group">
-        <input type="text" name="email" class="form-control" placeholder="Email" required="required">
-      </div>
-      <div class="form-group">
-        <input type="password" name="password" class="form-control" placeholder="Password" required="required">
-      </div>
-      <div class="form-group">
-        <button type="submit" class="btn btn-success btn-block" style="border-radius:0%;">Login</button>
-      </div>
-      <div class="clearfix">
-        <label class="float-left form-check-label"><input type="checkbox"> Remember me</label>
-      </div>
-    </form>
-    <p class="text-center">Don't have an account?<a href="register.php" class="text-danger"> Register Here</a></p>
-  </div>
+    <section>
+        <div class="form-box">
+            <div class="form-value">
+                <form action="" method="POST" autocomplete="off">
+                    <h2>Login</h2>
+                    <?php
+                      if (!empty($errormsg)) 
+                      {
+                        echo '<div class="error-message text-danger">' . $errormsg . '</div>';
+                      }
+                    ?>
+                    <div class="inputbox">
+                        <input type="text" name="email" required="required">
+                        <label for="">Email</label>
+                    </div>
+                    <div class="inputbox">
+                        <input type="password" name="password" required="required">
+                        <label for="">Password</label>
+                    </div>
+                    <div class="forget">
+                      <label class="float-left form-check-label"><input type="checkbox"> Remember me</label>
+                    </div>
+                    <button type="submit">Log in</button>
+                    <div class="register">
+                        <p>Don't have an account?<a href="register.php" class="text-danger"> Register Here</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
 </body>
 
 <!-- Bootstrap core JavaScript -->
