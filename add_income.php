@@ -134,6 +134,7 @@ if (isset($_GET['delete'])) {
             <div class="sidebar-heading">Settings </div>
             <div class="list-group list-group-flush">
                 <a href="profile.php" class="list-group-item list-group-item-action "><span data-feather="user"></span> Profile</a>
+                <a href="change_password.php" class="list-group-item list-group-item-action "><span data-feather="key"></span> Change Password</a>
                 <a href="logout.php" class="list-group-item list-group-item-action "><span data-feather="power"></span> Logout</a>
             </div>
         </div>
@@ -175,7 +176,7 @@ if (isset($_GET['delete'])) {
                     <div class="col-md" style="margin:0 auto;">
                         <form action="" method="POST">
                             <div class="form-group row">
-                                <label for="incomeamount" class="col-sm-6 col-form-label"><b>Enter Amount($)</b></label>
+                                <label for="incomeamount" class="col-sm-6 col-form-label"><b>Enter Amount(IDR)</b></label>
                                 <div class="col-md-6">
                                     <input type="number" class="form-control col-sm-12" value="<?php echo $incomeamount; ?>" id="incomeamount" name="incomeamount" required>
                                 </div>

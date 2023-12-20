@@ -70,7 +70,6 @@ while ($incDate = mysqli_fetch_array($inc_date_line)) {
 while ($incAmtLine = mysqli_fetch_array($inc_amt_line)) {
   $inc_line_amounts[] = $incAmtLine['SUM(income)'];
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -128,6 +127,8 @@ while ($incAmtLine = mysqli_fetch_array($inc_amt_line)) {
       <div class="list-group list-group-flush">
         <a href="profile.php" class="list-group-item list-group-item-action "><span data-feather="user"></span>
           Profile</a>
+        <a href="change_password.php" class="list-group-item list-group-item-action "><span data-feather="key"></span>
+          Change Password</a>
         <a href="logout.php" class="list-group-item list-group-item-action "><span data-feather="power"></span>
           Logout</a>
       </div>

@@ -43,7 +43,7 @@ $exp_fetched = mysqli_query($con, "SELECT * FROM expense WHERE user_id = '$useri
             <div class="sidebar-heading">Management</div>
             <div class="list-group list-group-flush">
                 <a href="index.php" class="list-group-item list-group-item-action"><span data-feather="home"></span>
-                    Dashboard</a>
+                        Dashboard</a>
                 <a href="add_expense.php" class="list-group-item list-group-item-action "><span
                         data-feather="plus-square"></span> Add Expense</a>
                 <a href="manage_expense.php" class="list-group-item list-group-item-action sidebar-active"><span
@@ -57,6 +57,8 @@ $exp_fetched = mysqli_query($con, "SELECT * FROM expense WHERE user_id = '$useri
             <div class="list-group list-group-flush">
                 <a href="profile.php" class="list-group-item list-group-item-action "><span data-feather="user"></span>
                     Profile</a>
+                <a href="change_password.php" class="list-group-item list-group-item-action "><span data-feather="key"></span>
+                    Change Password</a>
                 <a href="logout.php" class="list-group-item list-group-item-action "><span data-feather="power"></span>
                     Logout</a>
             </div>

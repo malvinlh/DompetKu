@@ -1,32 +1,46 @@
 <?php
 require('config.php');
+
 if (isset($_REQUEST['firstname'])) {
-  if ($_REQUEST['password'] == $_REQUEST['confirm_password']) {
     $firstname = stripslashes($_REQUEST['firstname']);
     $firstname = mysqli_real_escape_string($con, $firstname);
+
     $lastname = stripslashes($_REQUEST['lastname']);
     $lastname = mysqli_real_escape_string($con, $lastname);
 
     $email = stripslashes($_REQUEST['email']);
     $email = mysqli_real_escape_string($con, $email);
 
-
     $password = stripslashes($_REQUEST['password']);
     $password = mysqli_real_escape_string($con, $password);
 
-
     $created_date = date("Y-m-d H:i:s");
 
-    $query = "INSERT into users (firstname, lastname, password, email, created_date) VALUES ('$firstname','$lastname', '" . md5($password) . "', '$email', '$created_date')";
-    $result = mysqli_query($con, $query);
-    if ($result) {
-      header("Location: login.php");
+    // Check if the email already exists in the database
+    $email_check_query = "SELECT * FROM users WHERE email='$email' LIMIT 1";
+    $email_check_result = mysqli_query($con, $email_check_query);
+
+    if (mysqli_num_rows($email_check_result) > 0) {
+        $error_message = "Email already exists, please use another email.";
+    } else {
+        // Proceed with user registration
+        if ($_REQUEST['password'] == $_REQUEST['confirm_password']) {
+            $hashed_password = md5($password);
+            $query = "INSERT INTO users (firstname, lastname, password, email, created_date) VALUES ('$firstname', '$lastname', '$hashed_password', '$email', '$created_date')";
+            $result = mysqli_query($con, $query);
+
+            if ($result) {
+                header("Location: login.php");
+            } else {
+                echo "ERROR: Unable to register user";
+            }
+        } else {
+            echo "ERROR: Please Check Your Password & Confirmation password";
+        }
     }
-  } else {
-    echo ("ERROR: Please Check Your Password & Confirmation password");
-  }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -147,6 +161,12 @@ if (isset($_REQUEST['firstname'])) {
     .signup-form form a:hover {
       text-decoration: underline;
     }
+
+    .error-message {
+        color: #ff0000;
+        text-align: center;
+        margin-bottom: 1px;
+    }
   </style>
 </head>
 
@@ -160,6 +180,12 @@ if (isset($_REQUEST['firstname'])) {
           <div class="col"><input type="text" class="form-control" name="lastname" placeholder="Last Name" required="required"></div>
         </div>
       </div>
+      <?php
+        if (isset($error_message)) 
+        {
+          echo '<div class="error-message">' . $error_message . '</div>';
+        }
+      ?>
       <div class="form-group">
         <input type="email" class="form-control" name="email" placeholder="Email" required="required">
       </div>
@@ -179,6 +205,7 @@ if (isset($_REQUEST['firstname'])) {
     <div class="text-center">Already have an account? <a class="text-success" href="login.php">Login Here</a></div>
   </div>
 </body>
+
 <!-- Bootstrap core JavaScript -->
 <script src="js/jquery.slim.min.js"></script>
 <script src="js/bootstrap.min.js"></script>

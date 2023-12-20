@@ -2,8 +2,8 @@
 require('config.php');
 session_start();
 $errormsg = "";
-if (isset($_POST['email'])) {
-
+if (isset($_POST['email'])) 
+{
   $email = stripslashes($_REQUEST['email']);
   $email = mysqli_real_escape_string($con, $email);
   $password = stripslashes($_REQUEST['password']);
@@ -15,11 +15,15 @@ if (isset($_POST['email'])) {
     $_SESSION['email'] = $email;
     header("Location: index.php");
   } else {
-    $errormsg = "Wrong";
+    $errormsg  = "Login failed. Please try again.";
   }
-} else {
+} 
+else 
+{
+
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -95,6 +99,12 @@ if (isset($_POST['email'])) {
       font-size: 15px;
       font-weight: bold;
     }
+
+    .error-message {
+      color: #ff0000;
+      text-align: center;
+      margin-bottom: 15px;
+    }
   </style>
 </head>
 
@@ -103,6 +113,12 @@ if (isset($_POST['email'])) {
     <form action="" method="POST" autocomplete="off">
       <h2 class="text-center">DompetKu</h2>
       <p class="hint-text">Login Panel</p>
+      <?php
+        if (!empty($errormsg)) 
+        {
+          echo '<div class="error-message">' . $errormsg . '</div>';
+        }
+      ?>
       <div class="form-group">
         <input type="text" name="email" class="form-control" placeholder="Email" required="required">
       </div>
@@ -114,12 +130,12 @@ if (isset($_POST['email'])) {
       </div>
       <div class="clearfix">
         <label class="float-left form-check-label"><input type="checkbox"> Remember me</label>
-
       </div>
     </form>
     <p class="text-center">Don't have an account?<a href="register.php" class="text-danger"> Register Here</a></p>
   </div>
 </body>
+
 <!-- Bootstrap core JavaScript -->
 <script src="js/jquery.slim.min.js"></script>
 <script src="js/bootstrap.min.js"></script>

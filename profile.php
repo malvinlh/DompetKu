@@ -1,22 +1,24 @@
 <?php
 include("session.php");
-$exp_fetched = mysqli_query($con, "SELECT * FROM expense WHERE user_id = '$userid'");
-
-if (isset($_POST['save'])) {
+if (isset($_POST['save'])) 
+{
     $fname = $_POST['first_name'];
     $lname = $_POST['last_name'];
 
     $sql = "UPDATE users SET firstname = '$fname', lastname='$lname' WHERE user_id='$userid'";
-    if (mysqli_query($con, $sql)) {
+    if (mysqli_query($con, $sql)) 
+    {
         echo "Records were updated successfully.";
-    } else {
+    } 
+    else 
+    {
         echo "ERROR: Could not able to execute $sql. " . mysqli_error($con);
     }
     header('location: profile.php');
 }
 
-if (isset($_POST['but_upload'])) {
-
+if (isset($_POST['but_upload'])) 
+{
     $name = $_FILES['file']['name'];
     $target_dir = "uploads/";
     $target_file = $target_dir . basename($_FILES["file"]["name"]);
@@ -28,7 +30,8 @@ if (isset($_POST['but_upload'])) {
     $extensions_arr = array("jpg", "jpeg", "png", "gif");
 
     // Check extension
-    if (in_array($imageFileType, $extensions_arr)) {
+    if (in_array($imageFileType, $extensions_arr)) 
+    {
 
         // Insert record
         $query = "UPDATE users SET profile_path = '$name' WHERE user_id='$userid'";
@@ -41,6 +44,21 @@ if (isset($_POST['but_upload'])) {
     }
 }
 
+if (isset($_POST['delete_account'])) 
+{
+    // Delete user account
+    $deleteUserQuery = "DELETE FROM users WHERE user_id='$userid'";
+    if (mysqli_query($con, $deleteUserQuery)) 
+    {
+        // Logout user after deleting the account
+        header("Location: logout.php");
+        exit();
+    } 
+    else 
+    {
+        echo "Error deleting account: " . mysqli_error($con);
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -87,6 +105,7 @@ if (isset($_POST['but_upload'])) {
             <div class="sidebar-heading">Settings </div>
             <div class="list-group list-group-flush">
                 <a href="profile.php" class="list-group-item list-group-item-action sidebar-active"><span data-feather="user"></span> Profile</a>
+                <a href="change_password.php" class="list-group-item list-group-item-action "><span data-feather="key"></span> Change Password</a>
                 <a href="logout.php" class="list-group-item list-group-item-action "><span data-feather="power"></span> Logout</a>
             </div>
         </div>
@@ -180,6 +199,14 @@ if (isset($_POST['but_upload'])) {
                                 <div class="col-md">
                                     <br>
                                     <button class="btn btn-block btn-md btn-success" style="border-radius:0%;" name="save" type="submit">Save Changes</button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <form class="form" action="" method="post" id="deleteAccountForm" onsubmit="return confirm('Are you sure you want to delete your account? This action is irreversible.');">
+                            <div class="form-group">
+                                <div class="col-md">
+                                    <button class="btn btn-block btn-md btn-danger" style="border-radius:0%;" name="delete_account" type="submit">Delete Account</button>
                                 </div>
                             </div>
                         </form>

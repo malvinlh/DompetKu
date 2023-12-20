@@ -47,6 +47,7 @@ $exp_fetched = mysqli_query($con, "SELECT * FROM income WHERE user_id = '$userid
             <div class="sidebar-heading">Settings </div>
             <div class="list-group list-group-flush">
                 <a href="profile.php" class="list-group-item list-group-item-action "><span data-feather="user"></span> Profile</a>
+                <a href="change_password.php" class="list-group-item list-group-item-action "><span data-feather="key"></span> Change Password</a>
                 <a href="logout.php" class="list-group-item list-group-item-action "><span data-feather="power"></span> Logout</a>
             </div>
         </div>
@@ -100,8 +101,8 @@ $exp_fetched = mysqli_query($con, "SELECT * FROM income WHERE user_id = '$userid
                             <?php $count=1; while ($row = mysqli_fetch_array($exp_fetched)) { ?>
                                 <tr>
                                     <td><?php echo $count;?></td>
-                                    <td>$<?php echo $row['incomedate']; ?></td>
-                                    <td><?php echo '$'.$row['income']; ?></td>
+                                    <td><?php echo $row['incomedate']; ?></td>
+                                    <td><?php echo 'Rp'.$row['income']; ?></td>
                                     <td><?php echo $row['incomecategory']; ?></td>
                                     <td class="text-center">
                                         <a href="add_income.php?edit=<?php echo $row['income_id']; ?>" class="btn btn-primary btn-sm" style="border-radius:0%;">Edit</a>

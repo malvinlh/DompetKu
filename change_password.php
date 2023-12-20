@@ -1,7 +1,39 @@
 <?php
 include("session.php");
-$exp_fetched = mysqli_query($con, "SELECT * FROM expenses WHERE user_id = '$userid'");
+
+$errorMessage = "";
+
+if (isset($_POST['updatepassword'])) {
+    $curr_password = $_POST['curr_password'];
+    $new_password = $_POST['new_password'];
+    $confirm_new_password = $_POST['confirm_new_password'];
+
+    $curr_password_hash = md5($curr_password);
+    $fetch_password_query = "SELECT password FROM users WHERE user_id = '$userid'";
+    $result = mysqli_query($con, $fetch_password_query);
+
+    if ($result) {
+        $row = mysqli_fetch_assoc($result);
+        $stored_password_hash = $row['password'];
+
+        if ($curr_password_hash === $stored_password_hash && $new_password === $confirm_new_password) {
+            $new_password_hash = md5($new_password);
+
+            $update_password_query = "UPDATE users SET password = '$new_password_hash' WHERE user_id = '$userid'";
+            if (mysqli_query($con, $update_password_query)) {
+                $errorMessage = "<div class='alert alert-success text-center' role='alert'>Password updated successfully.</div>";
+            } else {
+                $errorMessage = "<div class='alert alert-danger text-center' role='alert'>Error updating password: " . mysqli_error($con) . "</div>";
+            }
+        } else {
+            $errorMessage = "<div class='alert alert-danger text-center' role='alert'>Current password is incorrect or new passwords do not match.</div>";
+        }
+    } else {
+        $errorMessage = "<div class='alert alert-danger text-center' role='alert'>Error fetching password: " . mysqli_error($con) . "</div>";
+    }
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -38,14 +70,17 @@ $exp_fetched = mysqli_query($con, "SELECT * FROM expenses WHERE user_id = '$user
             </div>
             <div class="sidebar-heading">Management</div>
             <div class="list-group list-group-flush">
-                <a href="index.php" class="list-group-item list-group-item-action sidebar-active"><span data-feather="home"></span> Dashboard</a>
-                <a href="add_expense.php" class="list-group-item list-group-item-action "><span data-feather="plus-square"></span> Add Expenses</a>
-                <a href="manage_expense.php" class="list-group-item list-group-item-action "><span data-feather="dollar-sign"></span> Manage Expenses</a>
+            <a href="index.php" class="list-group-item list-group-item-action"><span data-feather="home"></span> Dashboard</a>
+                <a href="add_expense.php" class="list-group-item list-group-item-action "><span data-feather="plus-square"></span> Add Expense</a>
+                <a href="manage_expense.php" class="list-group-item list-group-item-action"><span data-feather="dollar-sign"></span> Manage Expense</a>
+                <a href="add_income.php" class="list-group-item list-group-item-action "><span data-feather="plus-square"></span> Add Income</a>
+                <a href="manage_income.php" class="list-group-item list-group-item-action"><span data-feather="dollar-sign"></span> Manage Income</a>
             </div>
             <div class="sidebar-heading">Settings </div>
             <div class="list-group list-group-flush">
-                <a href="profile.php" class="list-group-item list-group-item-action "><span data-feather="user"></span> Profile</a>
-                <a href="logout.php" class="list-group-item list-group-item-action "><span data-feather="power"></span> Logout</a>
+                <a href="profile.php" class="list-group-item list-group-item-action"><span data-feather="user"></span> Profile</a>
+                <a href="change_password.php" class="list-group-item list-group-item-action sidebar-active"><span data-feather="key"></span> Change Password</a>
+                <a href="logout.php" class="list-group-item list-group-item-action"><span data-feather="power"></span> Logout</a>
             </div>
         </div>
         <!-- /#sidebar-wrapper -->
@@ -62,12 +97,12 @@ $exp_fetched = mysqli_query($con, "SELECT * FROM expenses WHERE user_id = '$user
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Link</a>
-                        </li>
+                        </li> -->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <img class="img img-fluid rounded-circle" src="<?php echo $userprofile ?>" width="25">
@@ -84,46 +119,33 @@ $exp_fetched = mysqli_query($con, "SELECT * FROM expenses WHERE user_id = '$user
             </nav>
 
             <div class="container-fluid">
-                <h5>Hi <?php echo $firstname ?>! You can change your password here</h5>
-                <div class="row mt-3">
-                    <div class="col-md">
-                        <form class="form" action="" method="post" id="registrationForm" autocomplete="off">
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <h3 class="mt-4 text-center">Change Password</h3>
+                        <hr>
+                        <?php echo $errorMessage; ?>
+                        <form class="form" action="" method="post" id="changePasswordForm" autocomplete="off">
                             <div class="form-group">
-                                <div class="col">
-                                    <label for="password">
-                                        Enter Current Password
-                                    </label>
-                                    <input type="password" class="form-control" name="curr_password" id="password" placeholder="New Password">
-                                </div>
+                                <label for="curr_password">Enter Current Password</label>
+                                <input type="password" class="form-control" name="curr_password" id="curr_password" placeholder="Current Password" required>
                             </div>
                             <div class="form-group">
-                                <div class="col">
-                                    <label for="password">
-                                        Enter New Password
-                                    </label>
-                                    <input type="password" class="form-control" name="new_password" id="password" placeholder="New Password">
-                                </div>
+                                <label for="new_password">Enter New Password</label>
+                                <input type="password" class="form-control" name="new_password" id="new_password" placeholder="New Password" required>
                             </div>
                             <div class="form-group">
-
-                                <div class="col">
-                                    <label for="password2">
-                                        Confirm New Password
-                                    </label>
-                                    <input type="password" class="form-control" name="confirm_new_password" id="confirm_password" placeholder="Confirm Password">
-                                </div>
+                                <label for="confirm_new_password">Confirm New Password</label>
+                                <input type="password" class="form-control" name="confirm_new_password" id="confirm_new_password" placeholder="Confirm New Password" required>
                             </div>
-                            <div class="form-group">
-                                <div class="col-xs-12">
-                                    <br>
-                                    <button class="btn btn-block btn-primary" name="updatepassword" type="submit">Update Password</button>
-                                </div>
+                            <div class="form-group mt-4">
+                                <button class="btn btn-block btn-primary" name="updatepassword" type="submit">Update Password</button>
                             </div>
                         </form>
-                        <!--/tab-content-->
+
+                        <!-- Additional form elements as per your design -->
+                        <!-- ... -->
 
                     </div>
-                    <!--/col-9-->
                 </div>
             </div>
         </div>
