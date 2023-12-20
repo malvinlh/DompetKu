@@ -252,7 +252,7 @@ while ($incAmtLine = mysqli_fetch_array($inc_amt_line)) {
                       <?php echo $row['expensedate']; ?>
                     </td>
                     <td>
-                      <?php echo '$' . $row['expense']; ?>
+                      <?php echo 'Rp' . $row['expense']; ?>
                     </td>
                     <td>
                       <?php echo $row['expensecategory']; ?>
@@ -275,16 +275,16 @@ while ($incAmtLine = mysqli_fetch_array($inc_amt_line)) {
                 </thead>
 
                 <?php $count = 1;
-                while ($row = mysqli_fetch_array($exp_fetched)) { ?>
+                while ($row = mysqli_fetch_array($inc_fetched)) { ?>
                   <tr>
                     <td>
                       <?php echo $count; ?>
                     </td>
-                    <td>$
+                    <td>
                       <?php echo $row['incomedate']; ?>
                     </td>
                     <td>
-                      <?php echo '$' . $row['income']; ?>
+                      <?php echo 'Rp' . $row['income']; ?>
                     </td>
                     <td>
                       <?php echo $row['incomecategory']; ?>

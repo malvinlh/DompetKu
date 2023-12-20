@@ -121,7 +121,7 @@ $exp_fetched = mysqli_query($con, "SELECT * FROM expense WHERE user_id = '$useri
                                         <?php echo $row['expensedate']; ?>
                                     </td>
                                     <td>
-                                        <?php echo '$' . $row['expense']; ?>
+                                        <?php echo 'Rp' . $row['expense']; ?>
                                     </td>
                                     <td>
                                         <?php echo $row['expensecategory']; ?>

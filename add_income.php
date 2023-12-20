@@ -176,7 +176,7 @@ if (isset($_GET['delete'])) {
                     <div class="col-md" style="margin:0 auto;">
                         <form action="" method="POST">
                             <div class="form-group row">
-                                <label for="incomeamount" class="col-sm-6 col-form-label"><b>Enter Amount(IDR)</b></label>
+                                <label for="incomeamount" class="col-sm-6 col-form-label"><b>Enter Amount (IDR)</b></label>
                                 <div class="col-md-6">
                                     <input type="number" class="form-control col-sm-12" value="<?php echo $incomeamount; ?>" id="incomeamount" name="incomeamount" required>
                                 </div>
