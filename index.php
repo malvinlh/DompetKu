@@ -166,22 +166,22 @@ while ($incAmtLine = mysqli_fetch_array($inc_amt_line)) {
               <div class="card-body">
                 <div class="row">
                   <div class="col-md text-center">
-                    <a href="add_expense.php"><img src="icon/addex.png" width="57px" />
+                    <a href="add_expense.php"><img src="icon/addex - Copy.png" width="57px" />
                       <p>Add Expense</p>
                     </a>
                   </div>
                   <div class="col-md text-center">
-                    <a href="manage_expense.php"><img src="icon/maex.png" width="57px" />
+                    <a href="manage_expense.php"><img src="icon/maex - Copy.png" width="57px" />
                       <p>Manage Expense</p>
                     </a>
                   </div>
                   <div class="col-md text-center">
-                    <a href="add_income.php"><img src="icon/addex.png" width="57px" />
+                    <a href="add_income.php"><img src="icon/addin.png" width="57px" />
                       <p>Add Income</p>
                     </a>
                   </div>
                   <div class="col-md text-center">
-                    <a href="manage_income.php"><img src="icon/maex.png" width="57px" />
+                    <a href="manage_income.php"><img src="icon/main.png" width="57px" />
                       <p>Manage Income</p>
                     </a>
                   </div>
@@ -201,7 +201,7 @@ while ($incAmtLine = mysqli_fetch_array($inc_amt_line)) {
                       Total Balance
                     </h4>
                     <h4>
-                      <?php echo $total_balance ?>
+                      <?php echo 'Rp' . $total_balance ?>
                     </h4>
                   </div>
                   <div class="col-md text-center text-success">
@@ -210,7 +210,7 @@ while ($incAmtLine = mysqli_fetch_array($inc_amt_line)) {
                     </h4>
                     <h4>
                       +
-                      <?php echo $income_total ?>
+                      <?php echo 'Rp' . $income_total ?>
                     </h4>
                   </div>
                   <div class="col-md text-center text-danger">
@@ -219,7 +219,7 @@ while ($incAmtLine = mysqli_fetch_array($inc_amt_line)) {
                     </h4>
                     <h4>
                       -
-                      <?php echo $expense_total ?>
+                      <?php echo 'Rp' . $expense_total ?>
                     </h4>
                   </div>
                 </div>
@@ -227,7 +227,7 @@ while ($incAmtLine = mysqli_fetch_array($inc_amt_line)) {
             </div>
           </div>
         </div>
-        <h3>History</h3>
+        <h3 class="mt-4">History</h3>
         <div>
           <div class="row justify-content-center">
             <div class="col-md">
