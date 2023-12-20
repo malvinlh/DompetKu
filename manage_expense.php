@@ -33,21 +33,32 @@ $exp_fetched = mysqli_query($con, "SELECT * FROM expense WHERE user_id = '$useri
         <div class="border-right" id="sidebar-wrapper">
             <div class="user">
                 <img class="img img-fluid rounded-circle" src="<?php echo $userprofile ?>" width="120">
-                <h5><?php echo $username ?></h5>
-                <p><?php echo $useremail ?></p>
+                <h5>
+                    <?php echo $username ?>
+                </h5>
+                <p>
+                    <?php echo $useremail ?>
+                </p>
             </div>
             <div class="sidebar-heading">Management</div>
             <div class="list-group list-group-flush">
-                <a href="index.php" class="list-group-item list-group-item-action"><span data-feather="home"></span> Dashboard</a>
-                <a href="add_expense.php" class="list-group-item list-group-item-action "><span data-feather="plus-square"></span> Add Expense</a>
-                <a href="manage_expense.php" class="list-group-item list-group-item-action sidebar-active"><span data-feather="dollar-sign"></span> Manage Expense</a>
-                <a href="add_income.php" class="list-group-item list-group-item-action "><span data-feather="plus-square"></span> Add Income</a>
-                <a href="manage_income.php" class="list-group-item list-group-item-action "><span data-feather="dollar-sign"></span> Manage Income</a>
+                <a href="index.php" class="list-group-item list-group-item-action"><span data-feather="home"></span>
+                    Dashboard</a>
+                <a href="add_expense.php" class="list-group-item list-group-item-action "><span
+                        data-feather="plus-square"></span> Add Expense</a>
+                <a href="manage_expense.php" class="list-group-item list-group-item-action sidebar-active"><span
+                        data-feather="dollar-sign"></span> Manage Expense</a>
+                <a href="add_income.php" class="list-group-item list-group-item-action "><span
+                        data-feather="plus-square"></span> Add Income</a>
+                <a href="manage_income.php" class="list-group-item list-group-item-action "><span
+                        data-feather="dollar-sign"></span> Manage Income</a>
             </div>
             <div class="sidebar-heading">Settings </div>
             <div class="list-group list-group-flush">
-                <a href="profile.php" class="list-group-item list-group-item-action "><span data-feather="user"></span> Profile</a>
-                <a href="logout.php" class="list-group-item list-group-item-action "><span data-feather="power"></span> Logout</a>
+                <a href="profile.php" class="list-group-item list-group-item-action "><span data-feather="user"></span>
+                    Profile</a>
+                <a href="logout.php" class="list-group-item list-group-item-action "><span data-feather="power"></span>
+                    Logout</a>
             </div>
         </div>
         <!-- /#sidebar-wrapper -->
@@ -64,9 +75,10 @@ $exp_fetched = mysqli_query($con, "SELECT * FROM expense WHERE user_id = '$useri
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-                        
+
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <img class="img img-fluid rounded-circle" src="<?php echo $userprofile ?>" width="25">
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -97,20 +109,32 @@ $exp_fetched = mysqli_query($con, "SELECT * FROM expense WHERE user_id = '$useri
                                 </tr>
                             </thead>
 
-                            <?php $count=1; while ($row = mysqli_fetch_array($exp_fetched)) { ?>
+                            <?php $count = 1;
+                            while ($row = mysqli_fetch_array($exp_fetched)) { ?>
                                 <tr>
-                                    <td><?php echo $count;?></td>
-                                    <td>$<?php echo $row['expensedate']; ?></td>
-                                    <td><?php echo '$'.$row['expense']; ?></td>
-                                    <td><?php echo $row['expensecategory']; ?></td>
-                                    <td class="text-center">
-                                        <a href="add_expense.php?edit=<?php echo $row['expense_id']; ?>" class="btn btn-primary btn-sm" style="border-radius:0%;">Edit</a>
+                                    <td>
+                                        <?php echo $count; ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $row['expensedate']; ?>
+                                    </td>
+                                    <td>
+                                        <?php echo '$' . $row['expense']; ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $row['expensecategory']; ?>
                                     </td>
                                     <td class="text-center">
-                                        <a href="add_expense.php?delete=<?php echo $row['expense_id']; ?>" class="btn btn-danger btn-sm" style="border-radius:0%;">Delete</a>
+                                        <a href="add_expense.php?edit=<?php echo $row['expense_id']; ?>"
+                                            class="btn btn-primary btn-sm" style="border-radius:0%;">Edit</a>
+                                    </td>
+                                    <td class="text-center">
+                                        <a href="add_expense.php?delete=<?php echo $row['expense_id']; ?>"
+                                            class="btn btn-danger btn-sm" style="border-radius:0%;">Delete</a>
                                     </td>
                                 </tr>
-                            <?php $count++; } ?>
+                                <?php $count++;
+                            } ?>
                         </table>
                     </div>
 
@@ -129,7 +153,7 @@ $exp_fetched = mysqli_query($con, "SELECT * FROM expense WHERE user_id = '$useri
     <script src="js/Chart.min.js"></script>
     <!-- Menu Toggle Script -->
     <script>
-        $("#menu-toggle").click(function(e) {
+        $("#menu-toggle").click(function (e) {
             e.preventDefault();
             $("#wrapper").toggleClass("toggled");
         });

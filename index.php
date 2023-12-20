@@ -23,6 +23,9 @@ $inc_total_result = mysqli_query($con, "SELECT SUM(income) AS total_income FROM 
 $inc_total_row = mysqli_fetch_assoc($inc_total_result);
 $income_total = $inc_total_row['total_income'];
 
+// History
+$exp_fetched = mysqli_query($con, "SELECT * FROM expense WHERE user_id = '$userid'");
+$inc_fetched = mysqli_query($con, "SELECT * FROM income WHERE user_id = '$userid'");
 // Balance
 $total_balance = $income_total - $expense_total;
 
@@ -35,7 +38,6 @@ $inc_categories = [];
 $inc_amounts = [];
 $inc_dates = [];
 $inc_line_amounts = [];
-$balance = [];
 
 while ($expCat = mysqli_fetch_array($exp_category_dc)) {
   $exp_categories[] = $expCat['expensecategory'];
@@ -162,22 +164,22 @@ while ($incAmtLine = mysqli_fetch_array($inc_amt_line)) {
             <div class="card">
               <div class="card-body">
                 <div class="row">
-                  <div class="col text-center">
+                  <div class="col-md text-center">
                     <a href="add_expense.php"><img src="icon/addex.png" width="57px" />
                       <p>Add Expense</p>
                     </a>
                   </div>
-                  <div class="col text-center">
+                  <div class="col-md text-center">
                     <a href="manage_expense.php"><img src="icon/maex.png" width="57px" />
                       <p>Manage Expense</p>
                     </a>
                   </div>
-                  <div class="col text-center">
+                  <div class="col-md text-center">
                     <a href="add_income.php"><img src="icon/addex.png" width="57px" />
                       <p>Add Income</p>
                     </a>
                   </div>
-                  <div class="col text-center">
+                  <div class="col-md text-center">
                     <a href="manage_income.php"><img src="icon/maex.png" width="57px" />
                       <p>Manage Income</p>
                     </a>
@@ -193,7 +195,7 @@ while ($incAmtLine = mysqli_fetch_array($inc_amt_line)) {
             <div class="card">
               <div class="card-body">
                 <div class="row">
-                  <div class="col text-center">
+                  <div class="col-md text-center">
                     <h4>
                       Total Balance
                     </h4>
@@ -201,9 +203,97 @@ while ($incAmtLine = mysqli_fetch_array($inc_amt_line)) {
                       <?php echo $total_balance ?>
                     </h4>
                   </div>
+                  <div class="col-md text-center text-success">
+                    <h4>
+                      Total Income
+                    </h4>
+                    <h4>
+                      +
+                      <?php echo $income_total ?>
+                    </h4>
+                  </div>
+                  <div class="col-md text-center text-danger">
+                    <h4>
+                      Total Expense
+                    </h4>
+                    <h4>
+                      -
+                      <?php echo $expense_total ?>
+                    </h4>
+                  </div>
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+        <h3>History</h3>
+        <div>
+          <div class="row justify-content-center">
+            <div class="col-md">
+              <h3 class="mt-4 text-center">Expense History</h3>
+              <table class="table table-hover table-bordered">
+                <thead>
+                  <tr class="text-center">
+                    <th>#</th>
+                    <th>Date</th>
+                    <th>Amount</th>
+                    <th>Expense Category</th>
+                  </tr>
+                </thead>
+
+                <?php $count = 1;
+                while ($row = mysqli_fetch_array($exp_fetched)) { ?>
+                  <tr>
+                    <td>
+                      <?php echo $count; ?>
+                    </td>
+                    <td>
+                      <?php echo $row['expensedate']; ?>
+                    </td>
+                    <td>
+                      <?php echo '$' . $row['expense']; ?>
+                    </td>
+                    <td>
+                      <?php echo $row['expensecategory']; ?>
+                    </td>
+                  </tr>
+                  <?php $count++;
+                } ?>
+              </table>
+            </div>
+            <div class="col-md">
+              <h3 class="mt-4 text-center">Income History</h3>
+              <table class="table table-hover table-bordered">
+                <thead>
+                  <tr class="text-center">
+                    <th>#</th>
+                    <th>Date</th>
+                    <th>Amount</th>
+                    <th>Income Category</th>
+                  </tr>
+                </thead>
+
+                <?php $count = 1;
+                while ($row = mysqli_fetch_array($exp_fetched)) { ?>
+                  <tr>
+                    <td>
+                      <?php echo $count; ?>
+                    </td>
+                    <td>$
+                      <?php echo $row['incomedate']; ?>
+                    </td>
+                    <td>
+                      <?php echo '$' . $row['income']; ?>
+                    </td>
+                    <td>
+                      <?php echo $row['incomecategory']; ?>
+                    </td>
+                  </tr>
+                  <?php $count++;
+                } ?>
+              </table>
+            </div>
+
           </div>
         </div>
         <h3 class="mt-4">Full-Expense Report</h3>

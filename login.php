@@ -15,7 +15,7 @@ if (isset($_POST['email'])) {
     $_SESSION['email'] = $email;
     header("Location: index.php");
   } else {
-    $errormsg  = "Wrong";
+    $errormsg = "Wrong";
   }
 } else {
 }
@@ -60,7 +60,7 @@ if (isset($_POST['email'])) {
     .login-form h2:after {
       content: "";
       height: 2px;
-      width: 30%;
+      width: 20%;
       background: #d4d4d4;
       position: absolute;
       top: 50%;
@@ -101,7 +101,7 @@ if (isset($_POST['email'])) {
 <body>
   <div class="login-form">
     <form action="" method="POST" autocomplete="off">
-      <h2 class="text-center">D.E.M.S</h2>
+      <h2 class="text-center">DompetKu</h2>
       <p class="hint-text">Login Panel</p>
       <div class="form-group">
         <input type="text" name="email" class="form-control" placeholder="Email" required="required">
@@ -114,7 +114,7 @@ if (isset($_POST['email'])) {
       </div>
       <div class="clearfix">
         <label class="float-left form-check-label"><input type="checkbox"> Remember me</label>
-        
+
       </div>
     </form>
     <p class="text-center">Don't have an account?<a href="register.php" class="text-danger"> Register Here</a></p>
@@ -125,7 +125,7 @@ if (isset($_POST['email'])) {
 <script src="js/bootstrap.min.js"></script>
 <!-- Menu Toggle Script -->
 <script>
-  $("#menu-toggle").click(function(e) {
+  $("#menu-toggle").click(function (e) {
     e.preventDefault();
     $("#wrapper").toggleClass("toggled");
   });
