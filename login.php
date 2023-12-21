@@ -34,7 +34,7 @@ else
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Login</title>
+  <title>DompetKu - Login</title>
 
   <!-- Bootstrap core CSS -->
   <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -51,7 +51,7 @@ else
         min-height: 100vh;
         width: 100%;
         
-        background: url('uploads/login_reg_bg.jpg') no-repeat;
+        background: url('uploads/background.jpg') no-repeat;
         background-position: center;
         background-size: cover;
     }
@@ -104,25 +104,6 @@ else
         color: #fff;
     }
     
-    .forget{
-        margin: -15px 0 15px ;
-        font-size: .9em;
-        color: #fff;
-        display: flex;
-        justify-content: space-between;  
-    }
-
-    .forget label input{
-        margin-right: 3px;
-        
-    }
-    .forget label a{
-        color: #fff;
-        text-decoration: none;
-    }
-    .forget label a:hover{
-        text-decoration: underline;
-    }
     button{
         width: 100%;
         height: 40px;
@@ -179,21 +160,6 @@ else
         font-size: 0.8em;
       }
 
-      .forget {
-        margin: -10px 0 10px;
-        font-size: 0.8em;
-      }
-
-      .forget label {
-        font-size: 0.8em;
-        display: flex;
-        align-items: center;
-      }
-
-      .forget label input {
-        margin-right: 3px;
-      }
-
       button {
         width: 100%;
         font-size: 0.8em;
@@ -225,9 +191,6 @@ else
                     <div class="inputbox">
                         <input type="password" name="password" required="required">
                         <label for="">Password</label>
-                    </div>
-                    <div class="forget">
-                      <label class="float-left form-check-label"><input type="checkbox"> Remember me</label>
                     </div>
                     <button type="submit">Login</button>
                     <div class="register">

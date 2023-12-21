@@ -49,7 +49,7 @@ if (isset($_REQUEST['firstname'])) {
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Register</title>
+  <title>DompetKu - Register</title>
 
   <!-- Bootstrap core CSS -->
   <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -66,7 +66,7 @@ if (isset($_REQUEST['firstname'])) {
       align-items: center;
       min-height: 100vh;
       width: 100%;
-      background: url('uploads/login_reg_bg.jpg') no-repeat;
+      background: url('uploads/background.jpg') no-repeat;
       background-position: center;
       background-size: cover;
     }

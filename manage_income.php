@@ -12,7 +12,7 @@ $exp_fetched = mysqli_query($con, "SELECT * FROM income WHERE user_id = '$userid
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Income Manager - Dashboard</title>
+    <title>DompetKu - Income Manager</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -23,9 +23,34 @@ $exp_fetched = mysqli_query($con, "SELECT * FROM income WHERE user_id = '$userid
     <!-- Feather JS for Icons -->
     <script src="js/feather.min.js"></script>
 
+    <style>
+    body {
+      background-color: #fff; /* Set your preferred background color */
+    }
+
+    .content-wrapper {
+      min-height: 100vh; /* Set a minimum height to fill the viewport */
+      display: flex;
+      flex-direction: column;
+    }
+
+    #wrapper {
+      flex: 1;
+    }
+
+    @media (max-width: 767px) {
+        /* Adjust the font size for smaller screens */
+        footer {
+            font-size: 12px; /* You can adjust the size as needed */
+        }
+    }
+    </style>
+
 </head>
 
 <body>
+
+  <div class="content-wrapper">
 
     <div class="d-flex" id="wrapper">
 
@@ -131,6 +156,9 @@ $exp_fetched = mysqli_query($con, "SELECT * FROM income WHERE user_id = '$userid
     </div>
     <!-- /#wrapper -->
 
+    </div>
+    <!-- /.content-wrapper -->
+
     <!-- Bootstrap core JavaScript -->
     <script src="js/jquery.slim.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
@@ -145,6 +173,16 @@ $exp_fetched = mysqli_query($con, "SELECT * FROM income WHERE user_id = '$userid
     <script>
         feather.replace()
     </script>
+
+    <!-- Footer Section -->
+    <footer class="bg-success text-white text-center py-3">
+        <div class="container" style="margin-bottom: -15px;">
+            <p>&copy; <?php echo date("Y"); ?> DompetKu. All rights reserved.<br>
+            CREDITS:
+            Malvin Leonardo Hartanto (NRP 5025221033) & Ranto Bastara Hamonangan Sitorus (NRP 5025221228)<br>
+            Kuliah Pemrograman Web Jurusan Teknik Informatika ITS (2023). Dosen: Imam Kuswardayan, S.Kom, M.T</p>
+        </div>
+    </footer>
 
 </body>
 

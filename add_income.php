@@ -99,7 +99,7 @@ if (isset($_GET['delete'])) {
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Income Manager - Dashboard</title>
+    <title>DompetKu - Add Income</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -109,6 +109,15 @@ if (isset($_GET['delete'])) {
 
     <!-- Feather JS for Icons -->
     <script src="js/feather.min.js"></script>
+
+    <style>
+        @media (max-width: 767px) {
+            /* Adjust the font size for smaller screens */
+            footer {
+                font-size: 12px; /* You can adjust the size as needed */
+            }
+        }
+    </style>
 
 </head>
 
@@ -282,8 +291,15 @@ if (isset($_GET['delete'])) {
     <script>
         feather.replace();
     </script>
-    <script>
 
-    </script>
+  <!-- Footer Section -->
+  <footer class="bg-success text-white text-center py-3">
+    <div class="container" style="margin-bottom: -15px;">
+      <p>&copy; <?php echo date("Y"); ?> DompetKu. All rights reserved.<br>
+      CREDITS:
+      Malvin Leonardo Hartanto (NRP 5025221033) & Ranto Bastara Hamonangan Sitorus (NRP 5025221228)<br>
+      Kuliah Pemrograman Web Jurusan Teknik Informatika ITS (2023). Dosen: Imam Kuswardayan, S.Kom, M.T</p>
+    </div>
+  </footer>
 </body>
 </html>

@@ -12,7 +12,7 @@ $exp_fetched = mysqli_query($con, "SELECT * FROM expense WHERE user_id = '$useri
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Expense Manager - Dashboard</title>
+    <title>DompetKu - Expense Manager</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -23,134 +23,161 @@ $exp_fetched = mysqli_query($con, "SELECT * FROM expense WHERE user_id = '$useri
     <!-- Feather JS for Icons -->
     <script src="js/feather.min.js"></script>
 
+    <style>
+        body {
+            background-color: #fff; /* Set your preferred background color */
+        }
+
+        .content-wrapper {
+            min-height: 100vh; /* Set a minimum height to fill the viewport */
+            display: flex;
+            flex-direction: column;
+        }
+
+        #wrapper {
+            flex: 1;
+        }
+        
+        @media (max-width: 767px) {
+            /* Adjust the font size for smaller screens */
+            footer {
+                font-size: 12px; /* You can adjust the size as needed */
+            }
+        }
+    </style>
+
 </head>
 
 <body>
 
-    <div class="d-flex" id="wrapper">
+    <div class="content-wrapper">
 
-        <!-- Sidebar -->
-        <div class="border-right" id="sidebar-wrapper">
-            <div class="user">
-                <img class="img img-fluid rounded-circle" src="<?php echo $userprofile ?>" width="120">
-                <h5>
-                    <?php echo $username ?>
-                </h5>
-                <p>
-                    <?php echo $useremail ?>
-                </p>
-            </div>
-            <div class="sidebar-heading">Management</div>
-            <div class="list-group list-group-flush">
-                <a href="index.php" class="list-group-item list-group-item-action"><span data-feather="home"></span>
-                        Dashboard</a>
-                <a href="add_expense.php" class="list-group-item list-group-item-action "><span
-                        data-feather="plus-square"></span> Add Expense</a>
-                <a href="manage_expense.php" class="list-group-item list-group-item-action sidebar-active"><span
-                        data-feather="dollar-sign"></span> Manage Expense</a>
-                <a href="add_income.php" class="list-group-item list-group-item-action "><span
-                        data-feather="plus-square"></span> Add Income</a>
-                <a href="manage_income.php" class="list-group-item list-group-item-action "><span
-                        data-feather="dollar-sign"></span> Manage Income</a>
-            </div>
-            <div class="sidebar-heading">Settings </div>
-            <div class="list-group list-group-flush">
-                <a href="profile.php" class="list-group-item list-group-item-action "><span data-feather="user"></span>
-                    Profile</a>
-                <a href="change_password.php" class="list-group-item list-group-item-action "><span data-feather="key"></span>
-                    Change Password</a>
-                <a href="logout.php" class="list-group-item list-group-item-action "><span data-feather="power"></span>
-                    Logout</a>
-            </div>
-        </div>
-        <!-- /#sidebar-wrapper -->
+        <div class="d-flex" id="wrapper">
 
-        <!-- Page Content -->
-        <div id="page-content-wrapper">
-
-            <nav class="navbar navbar-expand-lg navbar-light  border-bottom">
-
-
-                <button class="toggler" type="button" id="menu-toggle" aria-expanded="false">
-                    <span data-feather="menu"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img class="img img-fluid rounded-circle" src="<?php echo $userprofile ?>" width="25">
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Your Profile</a>
-                                <a class="dropdown-item" href="#">Edit Profile</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="logout.php">Logout</a>
-                            </div>
-                        </li>
-                    </ul>
+            <!-- Sidebar -->
+            <div class="border-right" id="sidebar-wrapper">
+                <div class="user">
+                    <img class="img img-fluid rounded-circle" src="<?php echo $userprofile ?>" width="120">
+                    <h5><?php echo $username ?></h5>
+                    <p><?php echo $useremail ?></p>
                 </div>
-            </nav>
+                <div class="sidebar-heading">Management</div>
+                <div class="list-group list-group-flush">
+                    <a href="index.php" class="list-group-item list-group-item-action"><span data-feather="home"></span>
+                        Dashboard</a>
+                    <a href="add_expense.php" class="list-group-item list-group-item-action "><span
+                            data-feather="plus-square"></span> Add Expense</a>
+                    <a href="manage_expense.php" class="list-group-item list-group-item-action sidebar-active"><span
+                            data-feather="dollar-sign"></span> Manage Expense</a>
+                    <a href="add_income.php" class="list-group-item list-group-item-action "><span
+                            data-feather="plus-square"></span> Add Income</a>
+                    <a href="manage_income.php" class="list-group-item list-group-item-action "><span
+                            data-feather="dollar-sign"></span> Manage Income</a>
+                </div>
+                <div class="sidebar-heading">Settings </div>
+                <div class="list-group list-group-flush">
+                    <a href="profile.php" class="list-group-item list-group-item-action "><span data-feather="user"></span>
+                        Profile</a>
+                    <a href="change_password.php" class="list-group-item list-group-item-action "><span data-feather="key"></span>
+                        Change Password</a>
+                    <a href="logout.php" class="list-group-item list-group-item-action "><span data-feather="power"></span>
+                        Logout</a>
+                </div>
+            </div>
+            <!-- /#sidebar-wrapper -->
 
-            <div class="container-fluid">
-            <h3 class="mt-4 text-center">Manage Expense</h3>
-            <hr>
-            <div class="row justify-content-center">
+            <!-- Page Content -->
+            <div id="page-content-wrapper">
 
-                <div class="col-md-6">
-                    <div class="table-responsive">
-                        <table class="table table-hover table-bordered">
-                            <thead>
-                                <tr class="text-center">
-                                    <th>#</th>
-                                    <th>Date</th>
-                                    <th>Amount</th>
-                                    <th>Expense Category</th>
-                                    <th colspan="2">Action</th>
-                                </tr>
-                            </thead>
+                <nav class="navbar navbar-expand-lg navbar-light  border-bottom">
 
-                            <?php
-                            $count = 1;
-                            while ($row = mysqli_fetch_array($exp_fetched)) {
-                            ?>
-                                <tr>
-                                    <td>
-                                        <?php echo $count; ?>
-                                    </td>
-                                    <td>
-                                        <?php echo $row['expensedate']; ?>
-                                    </td>
-                                    <td>
-                                        <?php echo 'Rp' . $row['expense']; ?>
-                                    </td>
-                                    <td>
-                                        <?php echo $row['expensecategory']; ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <a href="add_expense.php?edit=<?php echo $row['expense_id']; ?>" class="btn btn-primary btn-sm" style="border-radius:0%;">Edit</a>
-                                    </td>
-                                    <td class="text-center">
-                                        <a href="add_expense.php?delete=<?php echo $row['expense_id']; ?>" class="btn btn-danger btn-sm" style="border-radius:0%;">Delete</a>
-                                    </td>
-                                </tr>
-                            <?php
-                                $count++;
-                            }
-                            ?>
-                        </table>
+
+                    <button class="toggler" type="button" id="menu-toggle" aria-expanded="false">
+                        <span data-feather="menu"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <img class="img img-fluid rounded-circle" src="<?php echo $userprofile ?>" width="25">
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="#">Your Profile</a>
+                                    <a class="dropdown-item" href="#">Edit Profile</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="logout.php">Logout</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+
+                <div class="container-fluid">
+                    <h3 class="mt-4 text-center">Manage Expense</h3>
+                    <hr>
+                    <div class="row justify-content-center">
+
+                        <div class="col-md-6">
+                            <div class="table-responsive">
+                                <table class="table table-hover table-bordered">
+                                    <thead>
+                                        <tr class="text-center">
+                                            <th>#</th>
+                                            <th>Date</th>
+                                            <th>Amount</th>
+                                            <th>Expense Category</th>
+                                            <th colspan="2">Action</th>
+                                        </tr>
+                                    </thead>
+
+                                    <?php
+                                    $count = 1;
+                                    while ($row = mysqli_fetch_array($exp_fetched)) {
+                                    ?>
+                                        <tr>
+                                            <td>
+                                                <?php echo $count; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $row['expensedate']; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo 'Rp' . $row['expense']; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $row['expensecategory']; ?>
+                                            </td>
+                                            <td class="text-center">
+                                                <a href="add_expense.php?edit=<?php echo $row['expense_id']; ?>"
+                                                    class="btn btn-primary btn-sm" style="border-radius:0%;">Edit</a>
+                                            </td>
+                                            <td class="text-center">
+                                                <a href="add_expense.php?delete=<?php echo $row['expense_id']; ?>"
+                                                    class="btn btn-danger btn-sm" style="border-radius:0%;">Delete</a>
+                                            </td>
+                                        </tr>
+                                    <?php
+                                        $count++;
+                                    }
+                                    ?>
+                                </table>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
+                <!-- /#page-content-wrapper -->
 
             </div>
+            <!-- /#wrapper -->
+
         </div>
-    <!-- /#page-content-wrapper -->
+        <!-- /.content-wrapper -->
 
     </div>
-    <!-- /#wrapper -->
-
     <!-- Bootstrap core JavaScript -->
     <script src="js/jquery.slim.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
@@ -165,6 +192,16 @@ $exp_fetched = mysqli_query($con, "SELECT * FROM expense WHERE user_id = '$useri
     <script>
         feather.replace()
     </script>
+
+    <!-- Footer Section -->
+    <footer class="bg-success text-white text-center py-3">
+        <div class="container" style="margin-bottom: -15px;">
+            <p>&copy; <?php echo date("Y"); ?> DompetKu. All rights reserved.<br>
+                CREDITS:
+                Malvin Leonardo Hartanto (NRP 5025221033) & Ranto Bastara Hamonangan Sitorus (NRP 5025221228)<br>
+                Kuliah Pemrograman Web Jurusan Teknik Informatika ITS (2023). Dosen: Imam Kuswardayan, S.Kom, M.T</p>
+        </div>
+    </footer>
 
 </body>
 

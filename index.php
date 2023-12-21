@@ -80,7 +80,7 @@ while ($incAmtLine = mysqli_fetch_array($inc_amt_line)) {
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <title>Expense Manager - Dashboard</title>
+  <title>DompetKu - Dashboard</title>
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/style.css" rel="stylesheet">
   <script src="js/feather.min.js"></script>
@@ -93,6 +93,13 @@ while ($incAmtLine = mysqli_fetch_array($inc_amt_line)) {
     .card a:hover {
       color: #28a745;
       text-decoration: dotted;
+    }
+
+    @media (max-width: 767px) {
+        /* Adjust the font size for smaller screens */
+        footer {
+            font-size: 12px; /* You can adjust the size as needed */
+        }
     }
   </style>
 </head>
@@ -481,6 +488,16 @@ while ($incAmtLine = mysqli_fetch_array($inc_amt_line)) {
       }
     });
   </script>
+
+  <!-- Footer Section -->
+  <footer class="bg-success text-white text-center py-3">
+    <div class="container" style="margin-bottom: -15px;">
+      <p>&copy; <?php echo date("Y"); ?> DompetKu. All rights reserved.<br>
+      CREDITS:
+      Malvin Leonardo Hartanto (NRP 5025221033) & Ranto Bastara Hamonangan Sitorus (NRP 5025221228)<br>
+      Kuliah Pemrograman Web Jurusan Teknik Informatika ITS (2023). Dosen: Imam Kuswardayan, S.Kom, M.T</p>
+    </div>
+  </footer>
 </body>
 
 </html>
