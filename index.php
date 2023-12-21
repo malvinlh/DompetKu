@@ -8,7 +8,7 @@ $exp_amt_dc = mysqli_query($con, "SELECT SUM(expense) FROM expense WHERE user_id
 $exp_date_line = mysqli_query($con, "SELECT expensedate FROM expense WHERE user_id = '$userid' GROUP BY expensedate");
 $exp_amt_line = mysqli_query($con, "SELECT SUM(expense) FROM expense WHERE user_id = '$userid' GROUP BY expensedate");
 
-$exp_total_result = mysqli_query($con, "SELECT SUM(expense) AS total_expense FROM expense");
+$exp_total_result = mysqli_query($con, "SELECT SUM(expense) AS total_expense FROM expense WHERE user_id = '$userid'");
 $exp_total_row = mysqli_fetch_assoc($exp_total_result);
 $expense_total = $exp_total_row['total_expense'];
 
@@ -19,7 +19,7 @@ $inc_amt_dc = mysqli_query($con, "SELECT SUM(income) FROM income WHERE user_id =
 $inc_date_line = mysqli_query($con, "SELECT incomedate FROM income WHERE user_id = '$userid' GROUP BY incomedate");
 $inc_amt_line = mysqli_query($con, "SELECT SUM(income) FROM income WHERE user_id = '$userid' GROUP BY incomedate");
 
-$inc_total_result = mysqli_query($con, "SELECT SUM(income) AS total_income FROM income");
+$inc_total_result = mysqli_query($con, "SELECT SUM(income) AS total_income FROM income WHERE user_id = '$userid'");
 $inc_total_row = mysqli_fetch_assoc($inc_total_result);
 $income_total = $inc_total_row['total_income'];
 
@@ -201,7 +201,7 @@ while ($incAmtLine = mysqli_fetch_array($inc_amt_line)) {
                       Total Balance
                     </h4>
                     <h4>
-                      <?php echo 'Rp' . $total_balance ?>
+                      <?php echo ($total_balance >= 0 ? '+ ' : '- ') . 'Rp' . abs($total_balance) ?>
                     </h4>
                   </div>
                   <div class="col-md text-center text-success">
@@ -209,8 +209,7 @@ while ($incAmtLine = mysqli_fetch_array($inc_amt_line)) {
                       Total Income
                     </h4>
                     <h4>
-                      +
-                      <?php echo 'Rp' . $income_total ?>
+                      <h4>+ <?php echo ($income_total ? 'Rp' . $income_total : 'Rp0') ?></h4>
                     </h4>
                   </div>
                   <div class="col-md text-center text-danger">
@@ -218,8 +217,7 @@ while ($incAmtLine = mysqli_fetch_array($inc_amt_line)) {
                       Total Expense
                     </h4>
                     <h4>
-                      -
-                      <?php echo 'Rp' . $expense_total ?>
+                      <h4>- <?php echo ($expense_total ? 'Rp' . $expense_total : 'Rp0') ?></h4>
                     </h4>
                   </div>
                 </div>
@@ -232,6 +230,7 @@ while ($incAmtLine = mysqli_fetch_array($inc_amt_line)) {
           <div class="row justify-content-center">
             <div class="col-md">
               <h3 class="mt-4 text-center">Expense History</h3>
+              <div class="table-responsive">
               <table class="table table-hover table-bordered">
                 <thead>
                   <tr class="text-center">
@@ -261,9 +260,11 @@ while ($incAmtLine = mysqli_fetch_array($inc_amt_line)) {
                   <?php $count++;
                 } ?>
               </table>
+              </div>
             </div>
             <div class="col-md">
               <h3 class="mt-4 text-center">Income History</h3>
+              <div class="table-responsive">
               <table class="table table-hover table-bordered">
                 <thead>
                   <tr class="text-center">
@@ -293,6 +294,7 @@ while ($incAmtLine = mysqli_fetch_array($inc_amt_line)) {
                   <?php $count++;
                 } ?>
               </table>
+              </div>
             </div>
 
           </div>

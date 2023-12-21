@@ -81,44 +81,51 @@ $exp_fetched = mysqli_query($con, "SELECT * FROM income WHERE user_id = '$userid
                 </div>
             </nav>
 
+ 
             <div class="container-fluid">
                 <h3 class="mt-4 text-center">Manage Income</h3>
                 <hr>
                 <div class="row justify-content-center">
 
                     <div class="col-md-6">
-                        <table class="table table-hover table-bordered">
-                            <thead>
-                                <tr class="text-center">
-                                    <th>#</th>
-                                    <th>Date</th>
-                                    <th>Amount</th>
-                                    <th>Income Category</th>
-                                    <th colspan="2">Action</th>
-                                </tr>
-                            </thead>
+                        <div class="table-responsive">
+                            <table class="table table-hover table-bordered">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th>#</th>
+                                        <th>Date</th>
+                                        <th>Amount</th>
+                                        <th>Income Category</th>
+                                        <th colspan="2">Action</th>
+                                    </tr>
+                                </thead>
 
-                            <?php $count=1; while ($row = mysqli_fetch_array($exp_fetched)) { ?>
-                                <tr>
-                                    <td><?php echo $count;?></td>
-                                    <td><?php echo $row['incomedate']; ?></td>
-                                    <td><?php echo 'Rp'.$row['income']; ?></td>
-                                    <td><?php echo $row['incomecategory']; ?></td>
-                                    <td class="text-center">
-                                        <a href="add_income.php?edit=<?php echo $row['income_id']; ?>" class="btn btn-primary btn-sm" style="border-radius:0%;">Edit</a>
-                                    </td>
-                                    <td class="text-center">
-                                        <a href="add_income.php?delete=<?php echo $row['income_id']; ?>" class="btn btn-danger btn-sm" style="border-radius:0%;">Delete</a>
-                                    </td>
-                                </tr>
-                            <?php $count++; } ?>
-                        </table>
+                                <?php
+                                $count = 1;
+                                while ($row = mysqli_fetch_array($exp_fetched)) {
+                                ?>
+                                    <tr>
+                                        <td><?php echo $count; ?></td>
+                                        <td><?php echo $row['incomedate']; ?></td>
+                                        <td><?php echo 'Rp' . $row['income']; ?></td>
+                                        <td><?php echo $row['incomecategory']; ?></td>
+                                        <td class="text-center">
+                                            <a href="add_income.php?edit=<?php echo $row['income_id']; ?>" class="btn btn-primary btn-sm" style="border-radius:0%;">Edit</a>
+                                        </td>
+                                        <td class="text-center">
+                                            <a href="add_income.php?delete=<?php echo $row['income_id']; ?>" class="btn btn-danger btn-sm" style="border-radius:0%;">Delete</a>
+                                        </td>
+                                    </tr>
+                                <?php
+                                    $count++;
+                                }
+                                ?>
+                            </table>
+                        </div>
                     </div>
 
                 </div>
             </div>
-        </div>
-    </div>
     <!-- /#page-content-wrapper -->
 
     </div>

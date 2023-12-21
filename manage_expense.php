@@ -95,11 +95,12 @@ $exp_fetched = mysqli_query($con, "SELECT * FROM expense WHERE user_id = '$useri
             </nav>
 
             <div class="container-fluid">
-                <h3 class="mt-4 text-center">Manage Expense</h3>
-                <hr>
-                <div class="row justify-content-center">
+            <h3 class="mt-4 text-center">Manage Expense</h3>
+            <hr>
+            <div class="row justify-content-center">
 
-                    <div class="col-md-6">
+                <div class="col-md-6">
+                    <div class="table-responsive">
                         <table class="table table-hover table-bordered">
                             <thead>
                                 <tr class="text-center">
@@ -111,8 +112,10 @@ $exp_fetched = mysqli_query($con, "SELECT * FROM expense WHERE user_id = '$useri
                                 </tr>
                             </thead>
 
-                            <?php $count = 1;
-                            while ($row = mysqli_fetch_array($exp_fetched)) { ?>
+                            <?php
+                            $count = 1;
+                            while ($row = mysqli_fetch_array($exp_fetched)) {
+                            ?>
                                 <tr>
                                     <td>
                                         <?php echo $count; ?>
@@ -127,23 +130,22 @@ $exp_fetched = mysqli_query($con, "SELECT * FROM expense WHERE user_id = '$useri
                                         <?php echo $row['expensecategory']; ?>
                                     </td>
                                     <td class="text-center">
-                                        <a href="add_expense.php?edit=<?php echo $row['expense_id']; ?>"
-                                            class="btn btn-primary btn-sm" style="border-radius:0%;">Edit</a>
+                                        <a href="add_expense.php?edit=<?php echo $row['expense_id']; ?>" class="btn btn-primary btn-sm" style="border-radius:0%;">Edit</a>
                                     </td>
                                     <td class="text-center">
-                                        <a href="add_expense.php?delete=<?php echo $row['expense_id']; ?>"
-                                            class="btn btn-danger btn-sm" style="border-radius:0%;">Delete</a>
+                                        <a href="add_expense.php?delete=<?php echo $row['expense_id']; ?>" class="btn btn-danger btn-sm" style="border-radius:0%;">Delete</a>
                                     </td>
                                 </tr>
-                                <?php $count++;
-                            } ?>
+                            <?php
+                                $count++;
+                            }
+                            ?>
                         </table>
                     </div>
-
                 </div>
+
             </div>
         </div>
-    </div>
     <!-- /#page-content-wrapper -->
 
     </div>
