@@ -21,7 +21,7 @@ if (isset($_REQUEST['firstname'])) {
     $email_check_result = mysqli_query($con, $email_check_query);
 
     if (mysqli_num_rows($email_check_result) > 0) {
-        $error_message = "Email already exists, please use another email.";
+        $error_message_email = "Email exists, please use another email.";
     } else {
         // Proceed with user registration
         if ($_REQUEST['password'] == $_REQUEST['confirm_password']) {
@@ -31,11 +31,9 @@ if (isset($_REQUEST['firstname'])) {
 
             if ($result) {
                 header("Location: login.php");
-            } else {
-                echo "ERROR: Unable to register user";
             }
         } else {
-            echo "ERROR: Please Check Your Password & Confirmation password";
+            $error_message_pw = "Password does not match.";
         }
     }
 }
@@ -56,161 +54,234 @@ if (isset($_REQUEST['firstname'])) {
   <!-- Bootstrap core CSS -->
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      font-family: sans-serif;
+    }
+
     body {
-      color: #000;
-      background: #fff;
-      font-family: 'Roboto', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      width: 100%;
+      background: url('uploads/login_reg_bg.jpg') no-repeat;
+      background-position: center;
+      background-size: cover;
     }
 
-    .form-control {
-      height: 40px;
-      box-shadow: none;
-      color: #969fa4;
-    }
-
-    .form-control:focus {
-      border-color: #5cb85c;
-    }
-
-    .form-control,
-    .btn {
-      border-radius: 3px;
-    }
-
-    .signup-form {
-      width: 450px;
-      margin: 0 auto;
-      padding: 30px 0;
-      font-size: 15px;
-    }
-
-    .signup-form h2 {
-      color: #636363;
-      margin: 0 0 15px;
+    .form-box {
       position: relative;
+      width: 400px;
+      height: 700px;
+      background: transparent;
+      border: 2px solid rgba(255, 255, 255, 0.5);
+      border-radius: 20px;
+      backdrop-filter: blur(15px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    h2 {
+      font-size: 2em;
+      color: #fff;
       text-align: center;
     }
 
-    .signup-form h2:before,
-    .signup-form h2:after {
-      content: "";
-      height: 2px;
-      width: 30%;
-      background: #d4d4d4;
+    .inputbox {
+      position: relative;
+      margin: 30px 0;
+      width: 310px;
+      border-bottom: 2px solid #fff;
+    }
+
+    .inputbox label {
       position: absolute;
       top: 50%;
-      z-index: 2;
+      left: 5px;
+      transform: translateY(-50%);
+      color: #fff;
+      font-size: 1em;
+      pointer-events: none;
+      transition: .5s;
     }
 
-    .signup-form h2:before {
-      left: 0;
+    input:focus~label,
+    input:valid~label {
+      top: -5px;
     }
 
-    .signup-form h2:after {
-      right: 0;
+    .inputbox input {
+      width: 100%;
+      height: 50px;
+      background: transparent;
+      border: none;
+      outline: none;
+      font-size: 1em;
+      padding: 0 35px 0 5px;
+      color: #fff;
     }
 
-    .signup-form .hint-text {
-      color: #999;
-      margin-bottom: 30px;
-      text-align: center;
+    .forget {
+      margin: -15px 0 15px;
+      font-size: .9em;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
     }
 
-    .signup-form form {
-      color: #999;
-      border-radius: 3px;
-      margin-bottom: 15px;
+    .forget label input {
+      margin-right: 3px;
+    }
+
+    .forget label a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .forget label a:hover {
+      text-decoration: underline;
+    }
+
+    button {
+      width: 100%;
+      height: 40px;
+      border-radius: 40px;
       background: #fff;
-      box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-      padding: 30px;
-      border: 1px solid #ddd;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      font-size: 1em;
+      font-weight: 600;
     }
 
-    .signup-form .form-group {
-      margin-bottom: 20px;
+    .register {
+      font-size: .9em;
+      color: #fff;
+      text-align: center;
+      margin: 25px 0 10px;
     }
 
-    .signup-form input[type="checkbox"] {
-      margin-top: 3px;
-    }
-
-    .signup-form .btn {
-      font-size: 16px;
-      font-weight: bold;
-      min-width: 140px;
-      outline: none !important;
-    }
-
-    .signup-form .row div:first-child {
-      padding-right: 10px;
-    }
-
-    .signup-form .row div:last-child {
-      padding-left: 10px;
-    }
-
-    .signup-form a:hover {
+    .register p a {
       text-decoration: none;
+      color: #fff;
+      font-weight: 600;
     }
 
-    .signup-form form a {
-      color: #5cb85c;
-      text-decoration: none;
-    }
-
-    .signup-form form a:hover {
+    .register p a:hover {
       text-decoration: underline;
     }
 
     .error-message {
-        color: #ff0000;
-        text-align: center;
-        margin-bottom: 1px;
+      text-align: center;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    /* Media queries for responsiveness */
+    @media only screen and (max-width: 600px) {
+      .form-box {
+        width: 300px;
+        height: 550px;
+      }
+
+      h2 {
+        font-size: 1.5em;
+      }
+
+      .inputbox {
+        width: auto;
+        margin: 15px 0;
+      }
+
+      .inputbox label {
+        font-size: 0.8em;
+      }
+
+      input {
+        width: auto;
+        font-size: 0.8em;
+      }
+
+      .forget {
+        margin: -10px 0 10px;
+        font-size: 0.8em;
+      }
+
+      .forget label {
+        font-size: 0.8em;
+        display: flex;
+        align-items: center;
+      }
+
+      .forget label input {
+        margin-right: 3px;
+      }
+
+      button {
+        width: 100%;
+        font-size: 0.8em;
+      }
+
+      .register {
+        font-size: 0.7em;
+      }
     }
   </style>
 </head>
 
 <body>
-  <div class="signup-form">
-    <form action="" method="POST" autocomplete="off">
-      <h2>Register</h2>
-      <div class="form-group">
-        <div class="row">
-          <div class="col"><input type="text" class="form-control" name="firstname" placeholder="First Name" required="required"></div>
-          <div class="col"><input type="text" class="form-control" name="lastname" placeholder="Last Name" required="required"></div>
-        </div>
+  <section>
+    <div class="form-box">
+      <div class="form-value">
+        <form action="" method="POST" autocomplete="off">
+          <h2>Register</h2>
+          <?php
+          if (isset($error_message_email)) {
+            echo '<div class="error-message text-danger">' . $error_message_email . '</div>';
+          }
+          if (isset($error_message_pw)) {
+            echo '<div class="error-message text-danger">' . $error_message_pw . '</div>';
+          }
+          ?>
+          <div class="inputbox">
+            <input type="text" name="firstname" required="required">
+            <label for="">First Name</label>
+          </div>
+          <div class="inputbox">
+            <input type="text" name="lastname" required="required">
+            <label for="">Last Name</label>
+          </div>
+          <div class="inputbox">
+            <input type="email" name="email" required="required">
+            <label for="">Email</label>
+          </div>
+          <div class="inputbox">
+            <input type="password" name="password" required="required">
+            <label for="">Password</label>
+          </div>
+          <div class="inputbox">
+            <input type="password" name="confirm_password" required="required">
+            <label for="">Confirm Password</label>
+          </div>
+          <div class="forget">
+            <label class="float-left form-check-label"><input type="checkbox" required="required"> I accept the Terms of Use &amp; Privacy Policy</a></label>
+          </div>
+          <button type="submit">Register</button>
+          <div class="register">
+            <p>Already have an account?<a href="login.php" class="text-danger"> Login Here</a></p>
+          </div>
+        </form>
       </div>
-      <?php
-        if (isset($error_message)) 
-        {
-          echo '<div class="error-message">' . $error_message . '</div>';
-        }
-      ?>
-      <div class="form-group">
-        <input type="email" class="form-control" name="email" placeholder="Email" required="required">
-      </div>
-      <div class="form-group">
-        <input type="password" class="form-control" name="password" placeholder="Password" required="required">
-      </div>
-      <div class="form-group">
-        <input type="password" class="form-control" name="confirm_password" placeholder="Confirm Password" required="required">
-      </div>
-      <div class="form-group">
-        <label class="form-check-label"><input type="checkbox" required="required"> I accept the <a href="#">Terms of Use</a> &amp; <a href="#">Privacy Policy</a></label>
-      </div>
-      <div class="form-group">
-        <button type="submit" class="btn btn-danger btn-lg btn-block" style="border-radius:0%;">Register</button>
-      </div>
-    </form>
-    <div class="text-center">Already have an account? <a class="text-success" href="login.php">Login Here</a></div>
-  </div>
+    </div>
+  </section>
 </body>
 
 <!-- Bootstrap core JavaScript -->
 <script src="js/jquery.slim.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<!-- Croppie -->
-<script src="js/profile-picture.js"></script>
 <!-- Menu Toggle Script -->
 <script>
   $("#menu-toggle").click(function(e) {

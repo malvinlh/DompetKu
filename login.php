@@ -51,7 +51,7 @@ else
         min-height: 100vh;
         width: 100%;
         
-        background: url('uploads/login_bg.jpg')no-repeat;
+        background: url('uploads/login_reg_bg.jpg') no-repeat;
         background-position: center;
         background-size: cover;
     }
@@ -103,13 +103,7 @@ else
         padding:0 35px 0 5px;
         color: #fff;
     }
-    .inputbox ion-icon{
-        position: absolute;
-        right: 8px;
-        color: #fff;
-        font-size: 1.2em;
-        top: 20px;
-    }
+    
     .forget{
         margin: -15px 0 15px ;
         font-size: .9em;
@@ -159,6 +153,56 @@ else
       font-weight: bold;
       margin-bottom: 15px;
     }
+
+    /* Media queries for responsiveness */
+    @media only screen and (max-width: 600px) {
+      .form-box {
+        width: 300px;
+        height: 350px;
+      }
+
+      h2 {
+        font-size: 1.5em;
+      }
+
+      .inputbox {
+        width: auto;
+        margin: 15px 0;
+      }
+
+      .inputbox label {
+        font-size: 0.8em;
+      }
+
+      input {
+        width: auto;
+        font-size: 0.8em;
+      }
+
+      .forget {
+        margin: -10px 0 10px;
+        font-size: 0.8em;
+      }
+
+      .forget label {
+        font-size: 0.8em;
+        display: flex;
+        align-items: center;
+      }
+
+      .forget label input {
+        margin-right: 3px;
+      }
+
+      button {
+        width: 100%;
+        font-size: 0.8em;
+      }
+
+      .register {
+        font-size: 0.7em;
+      }
+    }
   </style>
 </head>
 
@@ -185,7 +229,7 @@ else
                     <div class="forget">
                       <label class="float-left form-check-label"><input type="checkbox"> Remember me</label>
                     </div>
-                    <button type="submit">Log in</button>
+                    <button type="submit">Login</button>
                     <div class="register">
                         <p>Don't have an account?<a href="register.php" class="text-danger"> Register Here</a></p>
                     </div>
