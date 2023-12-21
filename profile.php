@@ -1,4 +1,5 @@
 <?php
+ob_start();
 include("session.php");
 if (isset($_POST['save'])) 
 {
@@ -8,13 +9,12 @@ if (isset($_POST['save']))
     $sql = "UPDATE users SET firstname = '$fname', lastname='$lname' WHERE user_id='$userid'";
     if (mysqli_query($con, $sql)) 
     {
-        echo "Records were updated successfully.";
     } 
     else 
     {
-        echo "ERROR: Could not able to execute $sql. " . mysqli_error($con);
     }
     header('location: profile.php');
+    ob_end_flush();
 }
 
 if (isset($_POST['but_upload'])) 

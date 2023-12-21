@@ -1,4 +1,5 @@
 <?php
+ob_start();
 include("session.php");
 $update = false;
 $del = false;
@@ -23,11 +24,10 @@ if (isset($_POST['update'])) {
 
     $sql = "UPDATE income SET income='$incomeamount', incomedate='$incomedate', incomecategory='$incomecategory' WHERE user_id='$userid' AND income_id='$id'";
     if (mysqli_query($con, $sql)) {
-        echo "Records were updated successfully.";
     } else {
-        echo "ERROR: Could not able to execute $sql. " . mysqli_error($con);
     }
     header('location: manage_income.php');
+    ob_end_flush();
 }
 
 if (isset($_POST['update'])) {
@@ -38,11 +38,10 @@ if (isset($_POST['update'])) {
 
     $sql = "UPDATE income SET income='$incomeamount', incomedate='$incomedate', incomecategory='$incomecategory' WHERE user_id='$userid' AND income_id='$id'";
     if (mysqli_query($con, $sql)) {
-        echo "Records were updated successfully.";
     } else {
-        echo "ERROR: Could not able to execute $sql. " . mysqli_error($con);
     }
     header('location: manage_income.php');
+    ob_end_flush();
 }
 
 if (isset($_POST['delete'])) {
@@ -53,11 +52,10 @@ if (isset($_POST['delete'])) {
 
     $sql = "DELETE FROM income WHERE user_id='$userid' AND income_id='$id'";
     if (mysqli_query($con, $sql)) {
-        echo "Records were updated successfully.";
     } else {
-        echo "ERROR: Could not able to execute $sql. " . mysqli_error($con);
     }
     header('location: manage_income.php');
+    ob_end_flush();
 }
 
 if (isset($_GET['edit'])) {
@@ -70,7 +68,6 @@ if (isset($_GET['edit'])) {
         $incomedate = $n['incomedate'];
         $incomecategory = $n['incomecategory'];
     } else {
-        echo ("WARNING: AUTHORIZATION ERROR: Trying to Access Unauthorized data");
     }
 }
 
@@ -85,7 +82,6 @@ if (isset($_GET['delete'])) {
         $incomedate = $n['incomedate'];
         $incomecategory = $n['incomecategory'];
     } else {
-        echo ("WARNING: AUTHORIZATION ERROR: Trying to Access Unauthorized data");
     }
 }
 ?>

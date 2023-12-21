@@ -1,4 +1,5 @@
 <?php
+ob_start();
 include("session.php");
 $update = false;
 $del = false;
@@ -23,11 +24,12 @@ if (isset($_POST['update'])) {
 
     $sql = "UPDATE expense SET expense='$expenseamount', expensedate='$expensedate', expensecategory='$expensecategory' WHERE user_id='$userid' AND expense_id='$id'";
     if (mysqli_query($con, $sql)) {
-        echo "Records were updated successfully.";
+        
     } else {
-        echo "ERROR: Could not able to execute $sql. " . mysqli_error($con);
+        
     }
     header('location: manage_expense.php');
+    ob_end_flush();
 }
 
 if (isset($_POST['update'])) {
@@ -38,11 +40,12 @@ if (isset($_POST['update'])) {
 
     $sql = "UPDATE expense SET expense='$expenseamount', expensedate='$expensedate', expensecategory='$expensecategory' WHERE user_id='$userid' AND expense_id='$id'";
     if (mysqli_query($con, $sql)) {
-        echo "Records were updated successfully.";
+        
     } else {
-        echo "ERROR: Could not able to execute $sql. " . mysqli_error($con);
+       
     }
     header('location: manage_expense.php');
+    ob_end_flush();
 }
 
 if (isset($_POST['delete'])) {
@@ -53,11 +56,12 @@ if (isset($_POST['delete'])) {
 
     $sql = "DELETE FROM expense WHERE user_id='$userid' AND expense_id='$id'";
     if (mysqli_query($con, $sql)) {
-        echo "Records were updated successfully.";
+       
     } else {
-        echo "ERROR: Could not able to execute $sql. " . mysqli_error($con);
+        
     }
     header('location: manage_expense.php');
+    ob_end_flush();
 }
 
 if (isset($_GET['edit'])) {
@@ -69,8 +73,6 @@ if (isset($_GET['edit'])) {
         $expenseamount = $n['expense'];
         $expensedate = $n['expensedate'];
         $expensecategory = $n['expensecategory'];
-    } else {
-        echo ("WARNING: AUTHORIZATION ERROR: Trying to Access Unauthorized data");
     }
 }
 
@@ -84,8 +86,6 @@ if (isset($_GET['delete'])) {
         $expenseamount = $n['expense'];
         $expensedate = $n['expensedate'];
         $expensecategory = $n['expensecategory'];
-    } else {
-        echo ("WARNING: AUTHORIZATION ERROR: Trying to Access Unauthorized data");
     }
 }
 ?>
